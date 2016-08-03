@@ -5,7 +5,7 @@ This is an example of how to leverage the WikiPedia data to create a set of syno
 
 ## Console Application
 
-The application included under \src allows you to provide a word which is then sent to a SQLite database to return matched synonyms.  The usage for the application is as follows:
+The application included under \src\WikiSynonym allows you to provide a word which is then sent to a SQLite database to return matched synonyms.  The usage for the application is as follows:
 
 > WikiSynonym.exe sauna
 
@@ -56,5 +56,55 @@ william henry, iii gates,
 willy gates
 
 ## Data Set
-Within the \data directory you will find a tab separated file that contains all of the WikiPedia extracted synonyms.  This can be useful if you want to place this content in a different data store.
+Within the \data directory you will find a tab separated file (synonyms.tsv) that contains all of the WikiPedia extracted synonyms.  This can be useful if you want to place this content in a different data store.
+
+## How to recreate the Data Set
+In the event, you want to re-create the data set I provided above, you can do this by following these instructions.  Please note, that I used SQL Server, but you could use an alternate datastore such as MySQL which might be simpler since the data dump is already in MySQL format.
+
+### Step 1 - Download the SQL Dump Files
+
+Download and unzip latest SQL redirect and page files from (https://dumps.wikimedia.org/enwiki).  These will likley be of the format: enwiki-latest-redirect.sql.gz, and enwiki-latest-page.sql.gz
+
+Unzip these files to create the full .sql files.
+
+### Step 2 - Import the SQL Dump Files to SQL Server
+
+You will need a number of tables to host the WikiPedia data.  If you are using SQL Server, you can use the schema file (database_schema.sql) that I provided in the \data directory.
+
+Next, you will need to import the data.  I have provided a very basic application under \src\WikiSQLConverter which allows you to import the data from these files.  To use the application you run:
+
+> WikiSQLConverter.exe "[File path of wiki SQL file]" "[SQL Server Connection String]"
+
+Note: this step will likley take a significant amount of time.
+
+### Step 3 - Create the Synonyms table
+
+The following queries can be run to clean up the data in the synonym list as well as to combine it into a single table.
+
+> INSERT INTO page_relation
+> SELECT s.rd_from as sid, 
+>       t.page_id as tid, 
+>       p.page_namespace as snamespace,
+>       t.page_namespace as tnamespace, 
+>       p.page_title as stitle, 
+>       t.page_title as ttitle 
+> FROM redirect s 
+> JOIN page p ON (s.rd_from = p.page_id)
+> JOIN page t ON (s.rd_namespace = t.page_namespace AND s.rd_title = t.page_title);
+
+> insert into synonyms select lower(ttitle), lower(stitle) from page_relation group by lower(ttitle), lower(stitle);
+
+> delete from synonyms where synonym like '%??%' or root like '%??%'
+
+> update [synonyms] set root = REPLACE(root, '_', ' '), synonym = REPLACE(synonym, '_', ' ');
+
+> update synonyms set root = REPLACE(root, '\"', ' '), synonym = REPLACE(synonym, '\"', ' ');
+
+> update synonyms set root = REPLACE(root, '"', ' '), synonym = REPLACE(synonym, '"', ' ');
+
+> update synonyms set root = REPLACE(root, '“', ' '), synonym = REPLACE(synonym, '“', ' ');
+
+> update synonyms set root = REPLACE(root, '”', ' '), synonym = REPLACE(synonym, '”', ' ');
+
+
 
