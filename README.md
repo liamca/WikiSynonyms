@@ -58,7 +58,7 @@ willy gates
 ## Data Set
 Within the \data directory you will find a set of tab separated files (synonymsX.tsv) that contains all of the WikiPedia extracted synonyms.  This can be useful if you want to place this content in a different data store.
 
-## How to recreate the Data Set (Optionsal)
+## How to recreate the Data Set (Optional)
 In the event, you want to re-create the data set I provided above, you can do this by following these instructions.  Please note, that I used SQL Server, but you could use an alternate datastore such as MySQL which might be simpler since the data dump is already in MySQL format.
 
 ### Step 1 - Download the SQL Dump Files
@@ -105,6 +105,18 @@ The following queries can be run to clean up the data in the synonym list as wel
 > update synonyms set root = REPLACE(root, '“', ' '), synonym = REPLACE(synonym, '“', ' ');
 
 > update synonyms set root = REPLACE(root, '”', ' '), synonym = REPLACE(synonym, '”', ' ');
+
+### Step 4 - Extract Synonyms to Tab Separated Files
+
+In this step we will take all the synonyms and export them to a set of Tab Separated Files that can easily be integrated into a SQLite database to be used by our application.  To do this, you will run a BCP command to bulk copy the data out in files of no more than 2 million rows / file.  Please note, I had ~7M rows in the synonyms table so if you find you have more you might need to add another line or two...
+
+> bcp "SELECT * FROM [synonyms] ORDER BY Root OFFSET 0 ROWS FETCH NEXT 2000000 ROWS ONLY" queryout synonyms1.tsv -S (local) -d WikipediaSynonyms -T -t "\t" -c
+> bcp "SELECT * FROM [synonyms] ORDER BY Root OFFSET 2000001 ROWS FETCH NEXT 2000000 ROWS ONLY" queryout synonyms2.tsv -S (local) -d WikipediaSynonyms -T -t "\t" -c
+> bcp "SELECT * FROM [synonyms] ORDER BY Root OFFSET 4000001 ROWS FETCH NEXT 2000000 ROWS ONLY" queryout synonyms3.tsv -S (local) -d WikipediaSynonyms -T -t "\t" -c
+> bcp "SELECT * FROM [synonyms] ORDER BY Root OFFSET 6000001 ROWS FETCH NEXT 2000000 ROWS ONLY" queryout synonyms4.tsv -S (local) -d WikipediaSynonyms -T -t "\t" -c
+
+
+
 
 
 
