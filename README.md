@@ -1,6 +1,4 @@
 # WikiSynonyms
-Leveraging WikiPedia as a source for generation of synonyms beyond just typical english words.
-
 This is an example of how to leverage the WikiPedia data to create a set of synonyms.  Unlike traditional Thesauruses, this dataset allows for the creations of synonyms over words such as microsoft, bill gates, ISS, apartment, sauna, enzyme or toronto making it a really good solution to use in Full Text Search applications where you want to match what the user is typing to relevant synonyms in the content.
 
 ## Console Application
