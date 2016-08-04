@@ -111,11 +111,16 @@ The following queries can be run to clean up the data in the synonym list as wel
 In this step we will take all the synonyms and export them to a set of Tab Separated Files that can easily be integrated into a SQLite database to be used by our application.  To do this, you will run a BCP command to bulk copy the data out in files of no more than 2 million rows / file.  Please note, I had ~7M rows in the synonyms table so if you find you have more you might need to add another line or two...
 
 > bcp "SELECT * FROM [synonyms] ORDER BY Root OFFSET 0 ROWS FETCH NEXT 2000000 ROWS ONLY" queryout synonyms1.tsv -S (local) -d WikipediaSynonyms -T -t "\t" -c
+
 > bcp "SELECT * FROM [synonyms] ORDER BY Root OFFSET 2000001 ROWS FETCH NEXT 2000000 ROWS ONLY" queryout synonyms2.tsv -S (local) -d WikipediaSynonyms -T -t "\t" -c
+
 > bcp "SELECT * FROM [synonyms] ORDER BY Root OFFSET 4000001 ROWS FETCH NEXT 2000000 ROWS ONLY" queryout synonyms3.tsv -S (local) -d WikipediaSynonyms -T -t "\t" -c
+
 > bcp "SELECT * FROM [synonyms] ORDER BY Root OFFSET 6000001 ROWS FETCH NEXT 2000000 ROWS ONLY" queryout synonyms4.tsv -S (local) -d WikipediaSynonyms -T -t "\t" -c
 
+## Running the Synonym Application
 
+In order to run the Synonym application, we will need to create a SQLite database that will contain the synonyms.  
 
 
 
