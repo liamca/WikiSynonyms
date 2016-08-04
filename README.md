@@ -156,7 +156,31 @@ From the sqlite command line execute:
 
 > .import synonyms4.tsv synonyms
 
+Optionally at this point you can play with the synonyms by executing a query such as this to find all synonyms for microsoft.
+
+> with SynonymList as 
+
+> ( select synonym from synonyms where root = 'microsoft'
+
+> union 
+
+> select synonym from synonyms where root in ( 
+
+>   select root from synonyms where synonym = 'microsoft' 
+
+> )) 
+
+> select distinct synonym from SynonymList order by synonym 
+
+> go
+
 At this point you can exit out of the SQLite command window and copy the resulting synonyms.db to your source code working directory: \src\WikiSynonym
+
+### Step 3 - Building and running the Synonym Application
+
+Now that you have created and copied the SQLite database to your source code directory.  You can build the application and run it from a command line.  For example after building, you can run: 
+
+>WikiSynonym.exe "Bill Gates"
 
 
 
