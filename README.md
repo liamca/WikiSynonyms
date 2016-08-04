@@ -1,6 +1,8 @@
 # WikiSynonyms
 This is an example of how to leverage WikiPedia data to create a set of synonyms.  Unlike traditional Thesauruses, this dataset allows for the creations of synonyms over words such as microsoft, bill gates, ISS, apartment, sauna, enzyme or toronto making it a really good solution to use in Full Text Search applications where you want to match what the user is typing to relevant synonyms in the content.
 
+This also can be very useful for industry specific terms.  For example, in the medical industry you might want to have synonyms for words such as "enzyme" or in real estate, you might want to have synonyms for words such as "apartment".
+
 Please note that before you can run the synonym application, <b>you will need to re-create the SQLite database</b>.  To do this, please make sure to follow the steps outlined in the below section "Running the Synonym Application".  If you want to use the most recent set of WikiPedia data, please start from the section "How to recreate the Data Set (Optional)".
 
 ## Console Application
