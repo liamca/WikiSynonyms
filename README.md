@@ -1,5 +1,5 @@
 # WikiSynonyms
-This is an example of how to leverage the WikiPedia data to create a set of synonyms.  Unlike traditional Thesauruses, this dataset allows for the creations of synonyms over words such as microsoft, bill gates, ISS, apartment, sauna, enzyme or toronto making it a really good solution to use in Full Text Search applications where you want to match what the user is typing to relevant synonyms in the content.
+This is an example of how to leverage WikiPedia data to create a set of synonyms.  Unlike traditional Thesauruses, this dataset allows for the creations of synonyms over words such as microsoft, bill gates, ISS, apartment, sauna, enzyme or toronto making it a really good solution to use in Full Text Search applications where you want to match what the user is typing to relevant synonyms in the content.
 
 Please note that before you can run the synonym application, <b>you will need to re-create the SQLite database</b>.  To do this, please make sure to follow the steps outlined in the below section "Running the Synonym Application".  If you want to use the most recent set of WikiPedia data, please start from the section "How to recreate the Data Set (Optional)".
 
@@ -63,7 +63,7 @@ In the event, you want to re-create the data set I provided above, you can do th
 
 ### Step 1 - Download the SQL Dump Files
 
-Download and unzip latest SQL redirect and page files from (https://dumps.wikimedia.org/enwiki).  These will likley be of the format: enwiki-latest-redirect.sql.gz, and enwiki-latest-page.sql.gz
+Download and unzip latest SQL redirect and page files from (https://dumps.wikimedia.org/enwiki).  These will likely be of the format: enwiki-latest-redirect.sql.gz, and enwiki-latest-page.sql.gz
 
 Unzip these files to create the full .sql files.
 
@@ -75,7 +75,7 @@ Next, you will need to import the data.  I have provided a very basic applicatio
 
 > WikiSQLConverter.exe "[File path of wiki SQL file]" "[SQL Server Connection String]"
 
-Note: this step will likley take a significant amount of time.
+Note: this step will likely take a significant amount of time.
 
 ### Step 3 - Create the Synonyms table
 
@@ -178,6 +178,6 @@ At this point you can exit out of the SQLite command window and copy the resulti
 
 ### Step 3 - Building and running the Synonym Application
 
-Now that you have created and copied the SQLite database to your source code directory.  You can build the application and run it from a command line.  For example after building, you can run: 
+Now that you have created and copied the SQLite database to your source code directory.  You can build the application and run it from a command line.  For example, after building the application you can run: 
 
 >WikiSynonym.exe "Bill Gates"
