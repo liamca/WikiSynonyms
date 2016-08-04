@@ -56,9 +56,9 @@ william henry, iii gates,
 willy gates
 
 ## Data Set
-Within the \data directory you will find a tab separated file (synonyms.tsv) that contains all of the WikiPedia extracted synonyms.  This can be useful if you want to place this content in a different data store.
+Within the \data directory you will find a set of tab separated files (synonymsX.tsv) that contains all of the WikiPedia extracted synonyms.  This can be useful if you want to place this content in a different data store.
 
-## How to recreate the Data Set
+## How to recreate the Data Set (Optionsal)
 In the event, you want to re-create the data set I provided above, you can do this by following these instructions.  Please note, that I used SQL Server, but you could use an alternate datastore such as MySQL which might be simpler since the data dump is already in MySQL format.
 
 ### Step 1 - Download the SQL Dump Files
