@@ -120,7 +120,46 @@ In this step we will take all the synonyms and export them to a set of Tab Separ
 
 ## Running the Synonym Application
 
-In order to run the Synonym application, we will need to create a SQLite database that will contain the synonyms.  
+In order to run the Synonym application, we will need to create a SQLite database that will contain the synonyms.  Unfortunately, due to the size of the database, I could not include it in github, but luckily it is really easy to re-create.
+
+### Step 1 - Download SQLite
+
+If you do not already have SQLite installed, you can do this by going here: https://www.sqlite.org/download.html.  Since I have windows, I downloaded the Precompiled Binaries for Windows (sqlite-tools-win32-x86-3130000.zip).  Unzip this file and open a command prompt to this directory.
+
+### Step 2 - Create the SQLite database
+
+Copy the .tsv files from above to this directory and run the command:
+
+> sqlite3 synonyms.db
+
+From the sqlite command line execute: 
+
+> create table synonyms (root nvarchar(255), synonym nvarchar(255))
+
+> go
+
+> create index idx_synonyms_root on synonyms(root)
+
+> go
+
+> create index idx_synonyms_synonym on synonyms(synonym)
+
+> go
+
+> .separator "\t"
+
+> .import synonyms1.tsv synonyms
+
+> .import synonyms2.tsv synonyms
+
+> .import synonyms3.tsv synonyms
+
+> .import synonyms4.tsv synonyms
+
+At this point you can exit out of the SQLite command window and copy the resulting synonyms.db to your source code working directory: \src\WikiSynonym
+
+
+
 
 
 
