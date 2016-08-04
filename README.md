@@ -1,6 +1,8 @@
 # WikiSynonyms
 This is an example of how to leverage the WikiPedia data to create a set of synonyms.  Unlike traditional Thesauruses, this dataset allows for the creations of synonyms over words such as microsoft, bill gates, ISS, apartment, sauna, enzyme or toronto making it a really good solution to use in Full Text Search applications where you want to match what the user is typing to relevant synonyms in the content.
 
+Please note that before you can run the synonym application, <b>you will need to re-create the SQLite database</b>.  To do this, please make sure to follow the steps outlined in the below section "Running the Synonym Application".  If you want to use the most recent set of WikiPedia data, please start from the section "How to recreate the Data Set (Optional)".
+
 ## Console Application
 
 The application included under \src\WikiSynonym allows you to provide a word which is then sent to a SQLite database to return matched synonyms.  The usage for the application is as follows:
@@ -179,10 +181,3 @@ At this point you can exit out of the SQLite command window and copy the resulti
 Now that you have created and copied the SQLite database to your source code directory.  You can build the application and run it from a command line.  For example after building, you can run: 
 
 >WikiSynonym.exe "Bill Gates"
-
-
-
-
-
-
-
